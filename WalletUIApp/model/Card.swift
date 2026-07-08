@@ -13,9 +13,10 @@ struct Card: Identifiable {
     var title: String
     var cardCategory: String
     var cardType: String
-    
+}
     //dummy mock data
     let cards: [Card] = [
-        .init(cardBackground: "Card 1", title: "Grace", cardCategory: "DEBIT", cardType: "Visa")
+        .init(cardBackground: "Card 1", title: "Grace", cardCategory: "DEBIT", cardType: "Visa"),
+        .init(cardBackground: "Card 2", title: "Vitoria", cardCategory: "DEBIT", cardType: "Visa"),
     ]
-}
+
