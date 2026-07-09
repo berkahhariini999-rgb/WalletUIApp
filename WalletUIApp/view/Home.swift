@@ -22,6 +22,7 @@ struct Home: View {
             }
             .scrollIndicators(.hidden)
             .safeAreaPadding(15)
+            .scrollDisabled(isCardSelected)
             .navigationTitle(isNavigationTitleHidden ? "" : "Wallet")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
@@ -43,12 +44,18 @@ struct Home: View {
                     
                 }
                 
-                ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                if !isCardSelected {
+                    ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                }
+             
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Search", systemImage: "magnifyingglass") {
-                        
+                    if !isCardSelected {
+                        Button("Search", systemImage: "magnifyingglass") {
+                            
+                        }
                     }
+                   
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -80,6 +87,14 @@ struct Home: View {
     
     @ViewBuilder
     func CardView(_ card: Card) -> some View {
+        let isCurrent = card.id == selectedCardID
+        let currentIndex = cards.firstIndex(where: {
+            $0.id == card.id
+        }) ?? 0
+        let selectedCardIndex = cards.firstIndex(where: {
+            $0.id == selectedCardID
+        }) ?? 0
+        
         Rectangle()
             .foregroundStyle(.clear)
             .overlay {
@@ -131,6 +146,11 @@ struct Home: View {
                     
                 }
             }
+        
+//            .visualEffect {
+//                [info, isCardSelected] , proxy info
+//                return content
+//            }
     }
     
     var isNavigationTitleHidden: Bool {
